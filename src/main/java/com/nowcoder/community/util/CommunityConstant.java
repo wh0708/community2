@@ -1,5 +1,7 @@
 package com.nowcoder.community.util;
 
+import org.apache.kafka.common.protocol.types.Field;
+
 /**
  * @Author WH
  * @create 2021/11/8 21:56
@@ -45,5 +47,24 @@ public interface CommunityConstant {
      */
     int ENTITY_TYPE_USER=3;
 
+    /**
+     * 主题: 评论
+     */
+    String TOPIC_COMMENT = "comment";
+
+    /**
+     * 主题: 点赞
+     */
+    String TOPIC_LIKE = "like";
+
+    /**
+     * 主题: 关注
+     */
+    String TOPIC_FOLLOW = "follow";
+
+    /**
+     * 系统用户ID
+     */
+    int SYSTEM_USER_ID = 1;
 }
 
