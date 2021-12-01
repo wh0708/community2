@@ -9,6 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -46,6 +50,10 @@ public class LoginTickerInterceptor implements HandlerInterceptor {
                 User user =userService.findUserById(loginTicket.getUserId());
                 //在本次请求持有用户
                 hostHolder.setUsers(user);
+                // 构建用户认证的结果,并存入SecurityContext,以便于Security进行授权.
+                Authentication authentication = new UsernamePasswordAuthenticationToken(
+                        user, user.getPassword(), userService.getAuthorities(user.getId()));
+                SecurityContextHolder.setContext(new SecurityContextImpl(authentication)); //SecurityContext是通过SecurityContextHolder处理
             }
         }
         return true;
@@ -63,6 +71,7 @@ public class LoginTickerInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable Exception ex) throws Exception {
         logger.debug("afterHandle: "+handler.toString());
         hostHolder.clear();
+//        SecurityContextHolder.clearContext();
     }
 
 }
