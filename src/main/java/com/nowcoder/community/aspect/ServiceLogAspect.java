@@ -18,8 +18,8 @@ import java.util.Date;
  * @Author WH
  * @create 2021/11/20 21:22
  */
-@Component
-@Aspect
+//@Component
+//@Aspect
 public class ServiceLogAspect {
 
     private static final Logger logger= LoggerFactory.getLogger(ServiceLogAspect.class);
