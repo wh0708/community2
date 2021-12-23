@@ -60,7 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
                 // 删除  需要  AUTHORITY_ADMIN
                 .antMatchers(
                         "/discuss/delete",
-                        "/data/**"
+                        "/data/**",
+                        "/actuator/**"
                 )
                 .hasAnyAuthority(
                         AUTHORITY_ADMIN
